@@ -160,16 +160,10 @@
 @endsection
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
 <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/daTables.responsive.min.js') }}"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#assetTable').DataTable();
-    $('#assetTable1').DataTable();
-    $('#assetTable2').DataTable();
     $('#datetimepicker3').datetimepicker({
       format: 'YYYY-MM-DD'
     });
