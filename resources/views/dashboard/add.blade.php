@@ -161,10 +161,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
 <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-<<<<<<< HEAD
-<script type="text/javascript" src="{{ asset('js/daTables.responsive.min.js') }}"></script>
-=======
->>>>>>> origin/master
 <script type="text/javascript">
 $(document).ready(function(){
     $('#datetimepicker3').datetimepicker({
