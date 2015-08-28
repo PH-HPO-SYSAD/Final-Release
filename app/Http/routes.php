@@ -34,8 +34,6 @@ Route::group(['middleware' => 'auth'], function(){
 
 		Route::get('/asset/deployment', 'AssetController@getDeploy');
 
-
-
 	});
 
 	Route::get('/account/update', 'UserController@index');

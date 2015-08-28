@@ -20,29 +20,40 @@ class Asset extends Model
     	'location',
         'asset_history',
         'warranty',
+        'warranty_end',
     	'status',
     	'remarks',
     	'warranty_end',
     ];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function brand(){
+    public function brand()
+    {
         return $this->belongsTo(Brand::class);
     }
 
-    public function tags(){
+    public function tags()
+    {
         return $this->belongsToMany(Tag::class, 'asset_tags');
     }
 
-    public function asset_users(){
+    public function asset_users()
+    {
         return $this->hasMany(AssetUser::class);
     }
 
-    public function computers(){
+    public function computers()
+    {
         return $this->belongsToMany(Computer::class, 'computer_assets');
+    }
+
+    public function scopeDefectives($query)
+    {
+        return $query->where('status', 'Defective')->get();
     }
     
 }

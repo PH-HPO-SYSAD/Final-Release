@@ -21,7 +21,7 @@ class AssetController extends Controller
     {
         //Get all the asset with its relationship (category, brand, tags, asset_users, computers)
         $assets = Asset::with('category', 'brand', 'tags', 'asset_users', 'computers')->get();
-        $defectives = Asset::where('status', 'Defective')->get();
+        $defectives = Asset::with('category', 'brand', 'tags', 'asset_users', 'computers')->defectives();
         return view('assets.all')
             ->with(compact('assets', 'defectives'));
     }
@@ -52,20 +52,21 @@ class AssetController extends Controller
     public function store(Request $request)
     {
         $asset = Asset::create([
-            'tag_number'    => value($this->generate_tag_number($request->input('category'), $request->input('brand'))),
-            'description'   => $request->input('description'),
-            'category_id'   => $request->input('category'),
-            'model'         => $request->input('model'),
-            'brand_id'      => $request->input('brand'),
-            'serial_number' => $request->input('serial_number'),
-            'control_number'=> $request->input('control_number'),
-            'color'         => $request->input('color'),
-            'asset_history' => $request->input('asset_history'),
-            'warranty'      => $request->input('warranty'),
-            'location'      => $request->input('location'),
-            'status'        => $request->input('status'),
-            'remarks'       => $request->input('remarks'),
-            'warranty_end'  => $request->input('warranty_end')      
+            'tag_number'    => value($this->generate_tag_number($request->category, $request->brand)),
+            'description'   => $request->description,
+            'category_id'   => $request->category,
+            'model'         => $request->model,
+            'brand_id'      => $request->brand,
+            'serial_number' => $request->serial_number,
+            'control_number'=> $request->control_number,
+            'color'         => $request->color,
+            'asset_history' => $request->asset_history,
+            'warranty'      => $request->warranty,
+            'location'      => $request->location,
+            'status'        => $request->status,
+            'remarks'       => $request->remarks,
+            'waranty'       => $request->warranty,
+            'warranty_end'  => $request->warranty_end      
         ]);
         //if asset is successfully saved to the database
         if($asset){
