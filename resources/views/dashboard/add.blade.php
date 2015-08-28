@@ -1,6 +1,5 @@
 @extends('layout.master')
 @section('stylesheet')
-{{-- <link rel="stylesheet" type="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" href=""> --}}
 <link rel="stylesheet" type="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" href="">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.bootstrap.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.dataTables.min.css') }}">
@@ -111,13 +110,13 @@
                   <div class="form-group">
                     <label for="select" class="col-lg-2 control-label">Warranty Status</label>
                     <div class="col-lg-10">
-                      <select class="form-control" id="select" name="warranty">
+                      <select class="form-control" id="warranty" name="warranty">
                         <option value="Under Warranty">Under Warranty</option>
                         <option value="No Warranty">No Warranty</option>
                       </select>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" id="warrantyEnd">
                     <label for="select" class="col-lg-2 control-label">Warranty End</label>
                     <div class="col-lg-10">
                       <div class='input-group date' id='datetimepicker3'>
@@ -164,14 +163,18 @@
 <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
 <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/daTables.responsive.min.js') }}"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#assetTable').DataTable();
-    $('#assetTable1').DataTable();
-    $('#assetTable2').DataTable();
     $('#datetimepicker3').datetimepicker({
       format: 'YYYY-MM-DD'
+    });
+
+    $("#warranty").on('change', function(){
+      if($('#warranty').val() == "Under Warranty") {
+        $("#warrantyEnd").show();
+      } else{
+        $("#warrantyEnd").hide();
+      }
     });
 });
 </script>
