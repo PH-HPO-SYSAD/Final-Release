@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 
@@ -22,7 +23,7 @@ class AuthController extends Controller
     |
     */
 
-    use ThrottlesLogins, RedirectsUsers;
+    use ThrottlesLogins;
 
     /**
      * Create a new authentication controller instance.
@@ -67,7 +68,7 @@ class AuthController extends Controller
 
         $credentials = $this->getCredentials($request);
 
-        if (Auth::attempt($credentials, $request->has('remember'))) {
+        if (auth()->attempt($credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
@@ -85,7 +86,7 @@ class AuthController extends Controller
             ]);
     }
 
-     public function getRegister()
+    public function getRegister()
     {
         return view('auth.register');
     }
@@ -113,7 +114,7 @@ class AuthController extends Controller
 
         Auth::login($this->create($request->all()));
 
-        return redirect($this->redirectPath());
+        return redirect($this->redirectPath);
     }
 
     /**
@@ -133,7 +134,7 @@ class AuthController extends Controller
             return $this->authenticated($request, Auth::user());
         }
 
-        return redirect()->intended($this->redirectPath());
+        return redirect()->intended($this->redirectPath);
     }
 
     /**
