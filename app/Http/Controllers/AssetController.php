@@ -22,8 +22,7 @@ class AssetController extends Controller
         //Get all the asset with its relationship (category, brand, tags, asset_users, computers)
         $assets = Asset::with('category', 'brand', 'tags', 'asset_users', 'computers')->get();
         $defectives = Asset::with('category', 'brand', 'tags', 'asset_users', 'computers')->defectives();
-        return view('assets.all')
-            ->with(compact('assets', 'defectives'));
+        return view('assets.all')->with(compact('assets', 'defectives'));
     }
 
     /**
@@ -39,8 +38,7 @@ class AssetController extends Controller
     public function getDeploy()
     {
         $assets = Asset::where('location', 'vacant')->get();
-        return view('dashboard.deployment')
-            ->with(compact('assets'));
+        return view('dashboard.deployment')->with(compact('assets'));
     }
 
     /**

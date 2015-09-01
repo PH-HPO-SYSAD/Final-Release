@@ -45,20 +45,20 @@
 			    <tbody>
 			    	@foreach($assets as $asset)
 			        <tr>
-						<td>{{ $asset->tag_number }}</td> 
-						<td>{{ $asset->description }}</td> 
-						<td>{{ $asset->category->name }}</td> 
-						<td>{{ $asset->brand->name }}</td> 
-						<td>{{ $asset->model }}</td> 
-						<td>{{ $asset->status }}</td> 
-						<td>
-							<a href="/asset/{{ $asset->asset_id }}">
-								<button class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-search"></i> View</button>
-							</a>
-							<a href="#" data-toggle="modal" data-target="#edit">
-								<button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-edit"></i> edit</button>
-							</a>
-			       		</td>
+    						<td>{{ $asset->tag_number }}</td> 
+    						<td>{{ $asset->description }}</td> 
+    						<td>{{ $asset->category->name }}</td> 
+    						<td>{{ $asset->brand->name }}</td> 
+    						<td>{{ $asset->model }}</td> 
+    						<td>{{ $asset->status }}</td> 
+    						<td>
+    							<a href="/asset/{{ $asset->asset_id }}">
+    								<button class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-search"></i> View</button>
+    							</a>
+    							<a href="#" data-toggle="modal" data-target="#edit">
+    								<button class="btn btn-info btn-xs"><i class="glyphicon glyphicon-edit"></i> edit</button>
+    							</a>
+    			      </td>
 			        </tr>
 			        @endforeach
 			    </tbody>
@@ -68,7 +68,7 @@
 </div>
 </div>
 
-
+{{-- Modal --}}
 <div class="modal fade" id="learn">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -88,48 +88,47 @@
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
          <form class="form-horizontal">
-        <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-content">
+              <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title">Edit Asset Form</h4>
+              </div>
+              <div class="modal-body">
+                <fieldset>
+                  <legend>Edit Information below</legend>
+                  <div class="form-group">
+                    <label for="select" class="col-lg-2 control-label">Category</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" name="category">
+                      	@foreach(App\Category::all() as $category)
+                        <option value="{{ $category->category_id }}">{{ $category->name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                    <div class="form-group">
+                      <label for="select" class="col-lg-2 control-label">Status</label>
+                      <div class="col-lg-10">
+                        <select class="form-control" id="status" name="status">
+                          <option value="Working">Working</option>
+                          <option value="Defective">Defective</option>
+                        </select>
+                      </div>
+                    </div>
+                  <div class="form-group" id="AddInfo" hidden>
+                    <label for="textArea" class="col-lg-2 control-label">Additional Information</label>
+                    <div class="col-lg-10">
+                      <textarea class="form-control" rows="3" id="textArea"></textarea>
+                      <span class="help-block">Please Include Department information if needed</span>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="modal-footer">
+               <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
             </div>
-            <div class="modal-body">
-  <fieldset>
-    <legend>Edit Information below</legend>
-    <div class="form-group">
-        <label for="select" class="col-lg-2 control-label">Category</label>
-        <div class="col-lg-10">
-          <select class="form-control" name="category">
-          	@foreach(App\Category::all() as $category)
-            <option value="{{ $category->category_id }}">{{ $category->name }}</option>
-            @endforeach
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="select" class="col-lg-2 control-label">Status</label>
-        <div class="col-lg-10">
-          <select class="form-control" id="status" name="status">
-            <option value="Working">Working</option>
-            <option value="Defective">Defective</option>
-          </select>
-        </div>
-      </div>
-    <div class="form-group" id="AddInfo" hidden>
-      <label for="textArea" class="col-lg-2 control-label">Additional Information</label>
-      <div class="col-lg-10">
-        <textarea class="form-control" rows="3" id="textArea"></textarea>
-        <span class="help-block">Please Include Department information if needed</span>
-      </div>
-    </div>
-  </fieldset>
-
-            </div>
-            <div class="modal-footer">
-             <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
         </form>
     </div>
 </div>
