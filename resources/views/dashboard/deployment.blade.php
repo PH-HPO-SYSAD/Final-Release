@@ -64,6 +64,18 @@
       </tbody>
       </table>
     </div>
+<<<<<<< HEAD
+=======
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Cubicle Number</label>
+      <div class="col-lg-10">
+        <select class="form-control" id="select">
+          @foreach(App\Asset::where('category_id', 18)->get() as $cubicle)
+          <option>{{ $cubicle->tag_number }}</option>
+          @endforeach
+        </select>
+      </div>
+>>>>>>> origin/master
     </div>
   </div>
 </div>

@@ -55,5 +55,10 @@ class Asset extends Model
     {
         return $query->where('status', 'Defective')->get();
     }
+
+    public function location()
+    {
+        return $this->hasOne(Location::class, 'location_id');
+    }
     
 }

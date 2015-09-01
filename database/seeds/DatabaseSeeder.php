@@ -14,7 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        App\User::create([
+            'name' => 'Rosemale-John',
+            'username' => 'rosemalejohn',
+            'password' => Hash::make('rosemalejohn'),
+            'account_type' => 'admin'
+        ]);
 
         Model::reguard();
     }
