@@ -74,10 +74,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Dashboard Contents</h4>
+                <h4 class="modal-title">View Contents</h4>
             </div>
             <div class="modal-body">
-                <p>This is the contents of additional information about Dashboard</p>
+                <p>This is where you can search for a specific asset and edit if things went wrong. Only admin users are allowed to edit and update assets thank you.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
