@@ -31,7 +31,37 @@
 				<h3 class="panel-title">Auditing</h3>
 			</div>
 			<div class="panel-body">
-				tables..
+				<table class="table" id="assetTable">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Cubicle</th>
+                        <th>Assets</th>
+                        <th>Assigned Person</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($assets as $asset)
+                    <tr>
+                        <td>{{ $asset->location }}</td> 
+                        <td>{{ $asset->location }}</td> 
+                        <td>{{ $asset->location }}</td> 
+                        <td>{{ $asset->location }}</td> 
+                        <td>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox"> Mismatch &nbsp
+                          </label>
+                        </div>
+                        <a href="/asset/{{ $asset->asset_id }}">
+                            <button class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-search"></i> View</button>
+                        </a>
+                      </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
 			</div>
 		</div>
 	</div>

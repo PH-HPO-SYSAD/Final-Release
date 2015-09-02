@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Asset;
+use App\Location;
+use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +18,8 @@ class AuditController extends Controller
      */
     public function index()
     {
-        return view('dashboard.audit');
+        $assets = Asset::with('category', 'location', 'brand', 'tags', 'asset_users', 'computers')->get();
+        return view('dashboard.audit', compact('assets'));
     }
 
     /**
