@@ -20,7 +20,7 @@ class AuditController extends Controller
     {
         $assets = Asset::cubicles()->deployed()->get();
         foreach ($assets as $asset) {
-            dd($asset->deployments->first()->employee_name);
+            // dd($asset->deployments->first()->employee_name);
         }
         return view('dashboard.audit', compact('assets'));
     }

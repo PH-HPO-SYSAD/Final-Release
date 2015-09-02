@@ -13,6 +13,7 @@
 @section('contents')
     <div class="row">
         <div class="col-md-12">
+            <a href="/download/excel" class="btn btn-success">Export to Excel</a>
             <table class="table table-striped table-hover ">
               <thead>
                 <tr class>

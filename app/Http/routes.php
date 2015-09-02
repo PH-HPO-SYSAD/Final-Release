@@ -48,4 +48,6 @@ Route::group(['middleware' => 'auth'], function(){
 
 		get('/asset/{id}/deploy', 'AssetController@deploymentForm');
 	});
+
+	Route::get('/download/excel', 'ExcelController@ExportAsset');
 });
