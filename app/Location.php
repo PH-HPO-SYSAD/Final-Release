@@ -11,6 +11,6 @@ class Location extends Model
 
     public function asset()
     {
-    	return $this->belongsTo(Asset::class);
+    	return $this->hasMany(Asset::class);
     }
 }

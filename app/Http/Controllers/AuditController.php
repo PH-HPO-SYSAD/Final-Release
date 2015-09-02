@@ -18,7 +18,10 @@ class AuditController extends Controller
      */
     public function index()
     {
-        $assets = Asset::with('category', 'location', 'brand', 'tags', 'asset_users', 'computers')->get();
+        $assets = Asset::cubicles()->deployed()->get();
+        foreach ($assets as $asset) {
+            dd($asset->deployments->first()->employee_name);
+        }
         return view('dashboard.audit', compact('assets'));
     }
 

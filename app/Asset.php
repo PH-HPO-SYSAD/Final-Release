@@ -26,6 +26,9 @@ class Asset extends Model
     	'warranty_end',
     ];
 
+    // Scope - scope query
+    // return - collections
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -53,12 +56,12 @@ class Asset extends Model
 
     public function scopeDefectives($query)
     {
-        return $query->where('status', 'Defective')->get();
+        return $query->whereStatus('Defective')->get();
     }
 
     public function location()
     {
-        return $this->hasOne(Location::class, 'location_id');
+        return $this->belongsTo(Location::class, 'location_id');
     }
 
     public function scopeVacants($query)
@@ -68,7 +71,16 @@ class Asset extends Model
 
     public function deployments()
     {
-        return $this->hasMany(Deployment::class);
+        return $this->hasMany(Deployment::class, 'assigned_asset_id');
     }
     
+    public function scopeCubicles($query)
+    {   
+        return $query->where('category_id', 18);
+    }
+
+    public function scopeDeployed($query)
+    {
+        return $query->has('location')->with('location', 'deployments');
+    }
 }

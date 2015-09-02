@@ -44,10 +44,14 @@
                 <tbody>
                     @foreach($assets as $asset)
                     <tr>
-                        <td>{{ $asset->location }}</td> 
-                        <td>{{ $asset->location }}</td> 
-                        <td>{{ $asset->location }}</td> 
-                        <td>{{ $asset->location }}</td> 
+                        <td>{{ $asset->location->name }}</td> 
+                        <td>{{ $asset->tag_number }}</td> 
+                        <td>
+                            @foreach($asset->deployments as $asset)
+                                <li>{{ $asset->asset->tag_number }}</li>
+                            @endforeach
+                        </td> 
+                        <td>@{{ $asset->deployments->first()->employee_name }}</td> 
                         <td>
                         <div class="checkbox">
                           <label>
