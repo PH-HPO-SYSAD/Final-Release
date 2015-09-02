@@ -21,7 +21,7 @@
 
 <div class="row">
   <div class="col-md-11">
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Vacant Assets</h3>
       </div>
@@ -61,21 +61,18 @@
             </td>
           </tr>
         @endforeach
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-2 control-label">Cubicle Number</label>
+          <div class="col-lg-10">
+            <select class="form-control" id="select">
+              @foreach(App\Asset::where('category_id', 18)->get() as $cubicle)
+                <option>{{ $cubicle->tag_number }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
       </tbody>
       </table>
-    </div>
-<<<<<<< HEAD
-=======
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Cubicle Number</label>
-      <div class="col-lg-10">
-        <select class="form-control" id="select">
-          @foreach(App\Asset::where('category_id', 18)->get() as $cubicle)
-          <option>{{ $cubicle->tag_number }}</option>
-          @endforeach
-        </select>
-      </div>
->>>>>>> origin/master
     </div>
   </div>
 </div>
