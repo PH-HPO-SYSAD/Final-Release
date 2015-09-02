@@ -51,7 +51,7 @@
                         <td>
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox"> Mismatch &nbsp
+                            <input type="checkbox" name="checkbox"> Mismatch &nbsp
                           </label>
                         </div>
                         <a href="/asset/{{ $asset->asset_id }}">
