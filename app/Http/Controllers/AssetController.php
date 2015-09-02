@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Asset;
 use App\Category;
 use App\Brand;
+use App\Location;
 
 class AssetController extends Controller
 {
@@ -32,7 +33,8 @@ class AssetController extends Controller
      */
     public function create()
     {
-        return view('dashboard.add');
+        $locations = Location::all();
+        return view('dashboard.add')->with(compact('locations'));
     }
 
     public function getDeploy()
@@ -48,7 +50,8 @@ class AssetController extends Controller
      * @return Response
      */
     public function store(Request $request)
-    {
+    {  
+        // dd($request->all());
         $asset = Asset::create([
             'tag_number'    => value($this->generate_tag_number($request->category, $request->brand)),
             'description'   => $request->description,
@@ -60,7 +63,7 @@ class AssetController extends Controller
             'color'         => $request->color,
             'asset_history' => $request->asset_history,
             'warranty'      => $request->warranty,
-            'location'      => $request->location,
+            'location_id'   => $request->location,
             'status'        => $request->status,
             'remarks'       => $request->remarks,
             'waranty'       => $request->warranty,

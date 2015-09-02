@@ -281,6 +281,16 @@ label:hover:before {
         <form action="{{ action('Auth\AuthController@postLogin') }}" id="login-form" class="text-left" method="POST">
             <div class="login-form-main-message"></div>
             <div class="main-login-form">
+                @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @endif
                 <div class="login-group">
                     {!! csrf_field() !!}
                     <div class="form-group">

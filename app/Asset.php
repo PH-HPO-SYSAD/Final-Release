@@ -60,5 +60,10 @@ class Asset extends Model
     {
         return $this->hasOne(Location::class, 'location_id');
     }
+
+    public function scopeVacants($query)
+    {   
+        return $query->where('location_id', null);
+    }
     
 }

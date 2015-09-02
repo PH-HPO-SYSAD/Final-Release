@@ -52,7 +52,7 @@
                         <td>{{ $defective->tag_number }}</td> 
                         <td>{{ $defective->description }}</td> 
                         <td>{{ $defective->category->name }}</td> 
-                        <td>{{ $defective->brand->name }}</td> 
+                        <td>{{ $vacant->brand->name or 'No brand' }}</td> 
                         <td>{{ $defective->model }}</td> 
                         <td>{{ $defective->status }}</td> 
                         <td>
@@ -91,7 +91,7 @@
                         <td>{{ $asset->tag_number }}</td> 
                         <td>{{ $asset->description }}</td> 
                         <td>{{ $asset->category->name }}</td> 
-                        <td>{{ $asset->brand->name }}</td> 
+                        <td>{{ $vacant->brand->name or 'No brand' }}</td> 
                         <td>{{ $asset->model }}</td> 
                         <td>{{ $asset->status }}</td> 
                         <td>
@@ -130,7 +130,7 @@
                         <td>{{ $vacant->tag_number }}</td> 
                         <td>{{ $vacant->description }}</td> 
                         <td>{{ $vacant->category->name }}</td> 
-                        <td>{{ $vacant->brand->name }}</td> 
+                        <td>{{ $vacant->brand->name or 'No brand' }}</td> 
                         <td>{{ $vacant->model }}</td> 
                         <td>{{ $vacant->status }}</td> 
                         <td>

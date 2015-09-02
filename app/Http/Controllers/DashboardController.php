@@ -11,11 +11,12 @@ use App\Asset;
 class DashboardController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
     	$assets = Asset::with('category', 'brand', 'tags', 'asset_users', 'computers')->get();
     	$defectives = Asset::where('status', 'Defective')->get();
-    	$vacants = Asset::where('location', 'vacant')->get();
+    	$vacants = Asset::vacants()->get();
     	return view('dashboard')
-    	->with(compact('assets', 'defectives', 'vacants'));
+    		->with(compact('assets', 'defectives', 'vacants'));
     }
 }

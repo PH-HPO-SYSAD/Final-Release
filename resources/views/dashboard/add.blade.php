@@ -100,9 +100,11 @@
           <div class="form-group">
             <label for="select" class="col-lg-2 control-label">Deployment Status</label>
             <div class="col-lg-10">
-              <select class="form-control" id="select" name="location">
-                <option value="vacant">Vacant</option>
-                <option value="None">For Deployment</option>
+              <select class="form-control" id="select" name="location_id">
+                <option value="null">Vacant</option>
+                @foreach ($locations as $location)
+                <option value="{{ $location->location_id }}">{{ $location->name }}</option>
+                @endforeach
               </select>
             </div>
           </div>
