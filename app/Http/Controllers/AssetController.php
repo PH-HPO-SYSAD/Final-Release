@@ -10,6 +10,7 @@ use App\Asset;
 use App\Category;
 use App\Brand;
 use App\Location;
+use App\Deployment;
 
 class AssetController extends Controller
 {
@@ -41,6 +42,24 @@ class AssetController extends Controller
     {
         $assets = Asset::vacants()->get();
         return view('dashboard.deployment')->with(compact('assets'));
+    }
+
+    public function postDeploy(Request $request, $id)
+    {
+        $asset = Asset::find($id);
+        if ($asset) {
+            $asset->deployments()->save(new Deployment([
+                'assigned_asset_id' => $request->assigned_asset_id,
+                'employee_name' => $request->employee_name,
+            ]));
+        }
+        dd("Good");
+    }
+
+    public function deploymentForm($id)
+    {
+        $asset = Asset::find($id);
+        return view('dashboard.partials.deploy')->with(compact('asset'));
     }
 
     /**

@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 		Route::get('/asset/deployment', 'AssetController@getDeploy');
 
+		Route::post('/asset/{id}/deploy', 'AssetController@postDeploy');
+
 	});
 
 	Route::get('/account/update', 'UserController@index');
@@ -41,4 +43,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/asset', 'AssetController@index');
 
 	Route::get('/asset/{asset}', 'AssetController@show');
+
+	Route::group(['prefix' => 'api'], function(){
+
+		get('/asset/{id}/deploy', 'AssetController@deploymentForm');
+	});
 });

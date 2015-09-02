@@ -54,9 +54,7 @@
               <button class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-search"></i> View</button>
               </a>
               @if(auth()->user()->isAdmin())
-              <a href="#"  data-toggle="modal" data-target="#update">
-              <button class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i> Deploy</button>
-              </a>
+              <button onclick="deploy({{ $asset->asset_id }})" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i> Deploy</button>
               @endif
             </td>
           </tr>
@@ -88,58 +86,7 @@
 {{-- modal update --}}
 <div class="modal fade" id="update">
   <div class="modal-dialog">
-    <form class="form-horizontal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title">Deployment Form</h4>
-        </div>
-        <div class="modal-body">
-          <fieldset>
-            <legend>Fill the required information below</legend>
-            <div class="form-group">
-              <label for="inputEmail" class="col-lg-2 control-label">Assinged Employee</label>
-              <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputEmail" placeholder="Assinged Person">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputEmail" class="col-md-2 control-label">Cubicle Number</label>
-              <div class="col-lg-10">
-                <select class="form-control" id="select">
-                  @foreach(App\Asset::where('category_id', 18)->get() as $cubicle)
-                    <option>{{ $cubicle->tag_number }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="textArea" class="col-lg-2 control-label">Additional Information</label>
-              <div class="col-lg-10">
-                <textarea class="form-control" rows="3" id="textArea"></textarea>
-                <span class="help-block">Please Include Department information if needed</span>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="select" class="col-lg-2 control-label">Select Floor</label>
-              <div class="col-lg-10">
-                <select class="form-control" id="select">
-                  <option>1st Floor</option>
-                  <option>2nd Floor</option>
-                  <option>3rd Floor</option>
-                  <option>4th Floor</option>
-                </select>
-                <br>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-        <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </form>
+    
   </div>
 </div>
 @endsection
@@ -147,13 +94,24 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/daTables.responsive.min.js') }}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="/bower_components/bootbox.js/bootbox.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    $('#assetTable').DataTable();
-    $('#assetTable1').DataTable();
-    $('#assetTable2').DataTable();
-});
+$('#assetTable').DataTable();
+$('#assetTable1').DataTable();
+$('#assetTable2').DataTable();
+
+var message = null;
+
+function deploy(id) {
+  $.get('/api/asset/'+id+'/deploy', function(data){
+    message = data;
+    bootbox.dialog({
+      message: message,
+      title: "Deploy asset",
+
+    });
+  });
+}
 </script>
 @stop

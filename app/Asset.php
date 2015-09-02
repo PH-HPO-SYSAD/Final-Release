@@ -65,5 +65,10 @@ class Asset extends Model
     {   
         return $query->where('location_id', null);
     }
+
+    public function deployments()
+    {
+        return $this->hasMany(Deployment::class);
+    }
     
 }
