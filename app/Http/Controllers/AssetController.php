@@ -39,7 +39,7 @@ class AssetController extends Controller
 
     public function getDeploy()
     {
-        $assets = Asset::where('location', 'vacant')->get();
+        $assets = Asset::vacants()->get();
         return view('dashboard.deployment')->with(compact('assets'));
     }
 

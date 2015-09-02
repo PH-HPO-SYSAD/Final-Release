@@ -45,7 +45,7 @@
             <td>{{ $asset->tag_number }}</td> 
             <td>{{ $asset->description }}</td> 
             <td>{{ $asset->category->name }}</td> 
-            <td>{{ $asset->brand->name }}</td> 
+            <td>{{ $asset->brand->name or 'No brand' }}</td> 
             <td>{{ $asset->model }}</td> 
             <td>{{ $asset->location }}</td>
             <td>{{ $asset->status }}</td> 
