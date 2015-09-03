@@ -96,6 +96,7 @@
 <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="/bower_components/bootbox.js/bootbox.js"></script>
+<script type="text/javascript" src="/bower_components/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript">
 $('#assetTable').DataTable();
 $('#assetTable1').DataTable();

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Asset extends Model
 {
@@ -54,24 +55,14 @@ class Asset extends Model
         return $this->belongsToMany(Computer::class, 'computer_assets');
     }
 
-    public function scopeDefectives($query)
-    {
-        return $query->whereStatus('Defective')->get();
-    }
-
     public function location()
     {
         return $this->belongsTo(Location::class, 'location_id');
     }
 
-    public function scopeVacants($query)
-    {   
-        return $query->where('location_id', null);
-    }
-
-    public function deployments()
+    public function deployed()
     {
-        return $this->hasMany(Deployment::class, 'assigned_asset_id');
+        return $this->hasMany(Deployment::class, 'asset_id');
     }
     
     public function scopeCubicles($query)
@@ -79,8 +70,51 @@ class Asset extends Model
         return $query->where('category_id', 18);
     }
 
-    public function scopeDeployed($query)
+    public function scopeVacantAssets($query)
     {
-        return $query->has('location')->with('location', 'deployments');
+        return $query->with('location', 'deployments');
     }
+
+    // New methods
+
+    public function scopeWorking($query)
+    {
+        return $query->whereStatus('working');
+    }
+
+    public function scopeDefectives($query)
+    {
+        return $query->whereStatus('defective');
+    }
+
+    public function parent()
+    {
+        return $this->hasMany(Deployment::class, 'parent_id');
+    }
+
+    public function deployments()
+    {
+        return $this->hasMany(Deployment::class, 'asset_id');
+    }
+
+    public function scopeVacants($query)
+    {
+        return $query->whereHas('deployments', function($deployment){
+            $deployment
+                ->whereNotNull('date_to')
+                ->where('date_from', '<', Carbon::today())
+                ->where('date_to', '<', Carbon::today());
+        });
+    }
+
+    public function scopeDeployedAsset($query)
+    {
+        return $query->whereHas('deployments', function($deployment){
+            $deployment
+                ->where('date_from', '<=', Carbon::today())
+                ->where('date_to', '>=', Carbon::today())
+                ->orWhere('date_to', null);
+        })->with('deployments');
+    }
+
 }

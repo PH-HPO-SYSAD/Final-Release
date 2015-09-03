@@ -8,7 +8,7 @@ class Deployment extends Model
 {
 	public $primaryKey = 'deployment_id';
 	public $table = 'deployment';
-	public $fillable = ['asset_id', 'assigned_asset_id', 'employee_name'];
+	public $fillable = ['asset_id', 'parent_id', 'employee_id', 'location_id'];
 
 	public function asset()
 	{

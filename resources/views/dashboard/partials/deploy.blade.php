@@ -5,15 +5,33 @@
       <div class="form-group">
         <label for="inputEmail" class="col-lg-2 control-label">Assinged Employee</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputEmail" placeholder="Assinged Person" name="employee_name">
+          <select class="form-control chosen-select" name="employee_id">
+            @foreach(App\Employee::all() as $employee)
+            <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+            @endforeach
+          </select>
+        </div>
         </div>
       </div>
       <div class="form-group">
         <label for="inputEmail" class="col-md-2 control-label">Cubicle Number</label>
         <div class="col-lg-10">
-          <select class="form-control" name="assigned_asset_id">
-            @foreach(App\Asset::where('category_id', 18)->get() as $cubicle)
-              <option value="{{ $cubicle->asset_id }}">{{ $cubicle->tag_number }}</option>
+          <select class="form-control" name="parent_id">
+            <option value="null">No parent</option>
+            @foreach(App\Asset::deployedAsset()->get() as $parent)
+              @unless($parent->deployments->isEmpty())
+              <option value="{{ $parent->asset_id }}">{{ $parent->tag_number }}</option>
+              @endunless
+            @endforeach
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="col-md-2 control-label">Location</label>
+        <div class="col-lg-10">
+          <select class="form-control" name="location_id">
+            @foreach(App\Location::all() as $location)
+              <option value="{{ $location->location_id }}">{{ $location->name }}</option>
             @endforeach
           </select>
         </div>

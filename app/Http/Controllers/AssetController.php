@@ -11,6 +11,7 @@ use App\Category;
 use App\Brand;
 use App\Location;
 use App\Deployment;
+use Carbon\Carbon;
 
 class AssetController extends Controller
 {
@@ -21,9 +22,9 @@ class AssetController extends Controller
      */
     public function index()
     {
+        $assets = Asset::with('category', 'brand')->get();
+        $defectives = Asset::defectives()->with('category', 'brand')->get();
         //Get all the asset with its relationship (category, brand, tags, asset_users, computers)
-        $assets = Asset::with('category', 'brand', 'tags', 'asset_users', 'computers')->get();
-        $defectives = Asset::with('category', 'brand', 'tags', 'asset_users', 'computers')->defectives();
         return view('assets.all')->with(compact('assets', 'defectives'));
     }
 
@@ -41,19 +42,29 @@ class AssetController extends Controller
     public function getDeploy()
     {
         $assets = Asset::vacants()->get();
+        foreach (Asset::all() as $asset) {
+            if ($asset->deployments->isEmpty()) {
+                $assets->push($asset);
+            }    
+        }
         return view('dashboard.deployment')->with(compact('assets'));
     }
 
     public function postDeploy(Request $request, $id)
     {
+        // dd($request->all());
         $asset = Asset::find($id);
         if ($asset) {
+            flash()->success($asset->tag_number." successfully deployed!");
             $asset->deployments()->save(new Deployment([
-                'assigned_asset_id' => $request->assigned_asset_id,
-                'employee_name' => $request->employee_name,
+                'parent_id' => $request->parent_id == 'null' ? null : $request->parent_id,
+                'employee_id' => $request->employee_id,
+                'location_id' => $request->location_id
             ]));
+        } else {
+            flash()->error("Asset not found!");
         }
-        dd("Good");
+        return redirect()->back();
     }
 
     public function deploymentForm($id)
