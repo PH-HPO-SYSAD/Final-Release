@@ -47,6 +47,7 @@ class AssetController extends Controller
                 $assets->push($asset);
             }    
         }
+        // dd($assets);
         return view('dashboard.deployment')->with(compact('assets'));
     }
 

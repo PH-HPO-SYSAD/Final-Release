@@ -19,6 +19,7 @@
     </div>
 </div>
 
+{{-- vacant asset table --}}
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-primary">
@@ -63,7 +64,44 @@
       </table>
     </div>
   </div>
+  {{-- deployed asset --}}
+  <div class="col-md-13">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Deployed Assets</h3>
+      </div>
+    <div class="panel-body">
+      <table class="table" id="assetTable2">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Cubicle</th>
+            <th>Assigned Employee</th>
+            <th>Department</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+      <tbody>
+        @foreach($assets as $asset)
+          <tr>
+            <td>{{ $asset->location_id }}</td> 
+            <td>{{ $asset->parent_id }}</td>
+            <td>{{ $asset->parent_id }}</td>  
+            <td>{{ $asset->employee_id }}</td> 
+            <td>
+              <a href="/asset/{{ $asset->asset_id }}">
+              <button class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-search"></i> View</button>
+              </a>
+            </td>
+          </tr>
+        @endforeach
+      </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+
 
 {{-- modal --}}
 <div class="modal fade" id="learn">
